@@ -1,4 +1,4 @@
-- name: Install Python Requirements
+- name: Install Apt Packages
   hosts: core
   become: true
   tasks:
