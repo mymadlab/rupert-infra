@@ -32,7 +32,7 @@
         src: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}"
         dest: "{{ app_directory }}/kafka"
         state: link
-      when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+      when: not ansible_check_mode # Check will fail if Kafka has not already been installed
     - name: Create app/bin directory if it does not exist
       ansible.builtin.file:
         path: "{{ app_directory }}/bin"

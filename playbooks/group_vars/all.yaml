@@ -1,13 +1,21 @@
 ---
-# System Variables
+# System
 timezone: UTC
 common_packages: []
 
-# Application Variables
+# General
 app_directory: ~/app
 install_directory: ~/install_rupert
 
-# Kafka Variables
+# Kafka
 kafka_checksum: sha512:16ce46e590ba915f01b720ea514445e49c88bf129cf4ceab88878b122d54ef24f0dedb88d0eb178957f58057a6c6a9adbea8b8059307585daea13129b85ba1d8
 kafka_scala_version: 2.13
 kafka_version: 4.2.0
+
+# Python venv
+rupert_venv_version: 0.0.1
+beartype_version: 0.22.9
+confluent_kafka_version: 2.14.0
+flask_version: 3.1.3
+python_vlc_version: 3.0.21203
+tinytuya_version: 1.17.6
