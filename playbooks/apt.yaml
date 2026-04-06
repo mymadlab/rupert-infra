@@ -10,7 +10,12 @@
       ansible.builtin.apt:
         upgrade: dist
         update_cache: false
-    - name: Install python3.12
+    - name: Install openJDK 21 for Kafka
+      ansible.builtin.apt:
+        name: openjdk-21-jre-headless
+        state: present
+        update_cache: false
+    - name: Install Python3.12
       ansible.builtin.apt:
         name: python3.12
         state: present

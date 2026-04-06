@@ -1,0 +1,58 @@
+- name: Install Kafka
+  hosts: core
+  tasks: 
+    - name: Create install directory
+      ansible.builtin.file:
+        path: "{{ install_directory }}"
+        state: directory
+    - name: Download Kafka tarball
+      ansible.builtin.get_url:
+        url: "https://dlcdn.apache.org/kafka/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+        dest: "{{ install_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+        checksum: "{{ kafka_checksum }}"
+      when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+    - name: Extract Kafka
+      ansible.builtin.unarchive:
+        src: "{{ install_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+        dest: "{{ install_directory }}/"
+        remote_src: true
+      when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+    - name: Create app directory if it does exist
+      ansible.builtin.file:
+        path: "{{ app_directory }}"
+        state: directory
+    - name: Copy Kafka Directory to app
+      ansible.builtin.copy:
+        src: "{{ install_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/"
+        dest: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}"
+        remote_src: true
+        force: false
+    - name: Create a link to the Kafka directory in app
+      ansible.builtin.file:
+        src: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}"
+        dest: "{{ app_directory }}/kafka"
+        state: link
+      when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+    - name: Create app/bin directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ app_directory }}/bin"
+        state: directory
+    - name: Copy kafka control script to app/bin
+      ansible.builtin.copy:
+        src: kafka/files/kafka-control.sh
+        dest: "{{ app_directory }}/bin/kafka-control.sh"
+        mode: '0755'
+    - name: Copy kafka systemd service file
+      ansible.builtin.copy:
+        src: kafka/files/rupert-kafka.service
+        dest: /etc/systemd/system/
+      become: true
+    - name: Enable kafka service
+      ansible.builtin.service:
+        name: rupert-kafka
+        enabled: yes
+        state: started
+        daemon_reload: true
+      async: 60
+      poll: 5
+      become: true
