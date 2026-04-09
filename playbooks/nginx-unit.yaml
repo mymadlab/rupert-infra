@@ -1,42 +1,7 @@
 - name: Install NGINX Unit on Ubuntu 24.04
   hosts: core
-  become: true
   tasks:
-    - name: Install APT prerequisites
-      ansible.builtin.apt:
-        name:
-          - ca-certificates
-          - curl
-          - gpg
-        state: present
-        update_cache: true
-    - name: Download NGINX Unit signing key
-      ansible.builtin.get_url:
-        url: "{{ unit_repo_key_url }}"
-        dest: "{{ unit_repo_keyring_path }}"
-        mode: '0644'
-    - name: Add NGINX Unit APT repository
-      ansible.builtin.apt_repository:
-        repo: "deb [signed-by={{ unit_repo_keyring_path }}] {{ unit_repo_url }} {{ ansible_facts['distribution_release'] }} unit"
-        filename: nginx-unit
-        state: present
-    - name: Install NGINX Unit packages
-      ansible.builtin.apt:
-        name: "{{ unit_packages }}"
-        state: present
-        update_cache: true
-    - name: Add unit user to rupert group
-      ansible.builtin.user:
-        name: unit
-        groups: rupert
-        append: true
-      when: not ansible_check_mode # Check will fail till the unit user is created by installing unit package
-    - name: Enable and start NGINX Unit service
-      ansible.builtin.systemd:
-        name: unit
-        enabled: true
-        state: started
-    - name: Create a web directory if it does not exist
-      ansible.builtin.file:
-        path: "{{ app_directory }}/web"
-        state: directory
+      - import_tasks: tasks/install/nginx-unit.yaml
+        when: deploy == 'present'
+      - import_tasks: tasks/uninstall/nginx-unit.yaml
+        when: deploy == 'absent'
