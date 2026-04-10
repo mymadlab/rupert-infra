@@ -1,7 +1,73 @@
 # rupert-infra
 Responsible for deploying Ruperts infrastructure
 
-## Dependencies
+## Ansible Info
+
+### Vault
+
+You will need to generated an encrypted ansible vault and store the value of ansible_become_pass.
+
+```bash
+# Create vault
+ansible-vault create inventories/<env>/group_vars/all/vault.yaml
+```
+
+```bash
+# Store the value for ansible_become_pass
+ansible-vault create inventories/<env>/group_vars/all/vault.yaml
+```
+
+```bash
+# Decrypt and view the vault in plain text
+ansible-vault view inventories/<env>/group_vars/all/vault.yaml
+```
+
+### Version updates
+
+Many software and library versions can be updated by editing the values in playbooks/group_vars/all.yaml
+
+### Basic ansible usage commands to deploy
+
+```bash
+# Check for what updates may occur
+ansible-playbook -i inventories/<env> playbooks/<playbook>.yaml --check 
+```
+
+```bash
+# Install a playbook
+ansible-playbook -i inventories/<env> playbooks/<playbook>.yaml
+```
+
+```bash
+# Uninstall a playbook
+ansible-playbook -i inventories/<env> playbooks/<playbook>.yaml -e deploy=absent
+```
+
+```bash
+# Install everything
+ansible-playbook -i inventories/<env> playbooks/install.yaml
+```
+
+```bash
+# Uninstall everything
+ansible-playbook -i inventories/<env> playbooks/uninstall.yaml
+```
+
+## Rupert Infrastructure Dependencies
+
+These Ansible playbooks are meant to be used against Raspberry PI 4 hardware running Ubuntu 24.04.
+
+### System Packages
+
+ - Python 3.12
+ - Python3.12 Venv
+ - Open JDK 2.1 JRE Headless
+ - VLC Media Player
+
+### Other Software
+
+ - Kafka 2.13-4.20
+ - Unit
 
 ### Python Modules
 
