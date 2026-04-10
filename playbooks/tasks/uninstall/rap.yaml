@@ -1,15 +1,4 @@
 # Tasks required for uninstalling Rupert Audio Player (RAP)
-- name: Update apt cache if stale
-  ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
-  become: true
-- name: Uninstall VLC Media Player
-  ansible.builtin.apt:
-    name: vlc
-    state: absent
-    update_cache: false
-  become: true
 - name: Uninstall Rupert Audio Player python dependencies
   ansible.builtin.pip:
     name:

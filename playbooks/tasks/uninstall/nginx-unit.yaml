@@ -32,12 +32,3 @@
     path: "{{ unit_repo_keyring_path }}"
     state: absent
   become: true
-- name: Uninstall APT prerequisites
-  ansible.builtin.apt:
-    name:
-      - ca-certificates
-      - curl
-      - gpg
-    state: absent
-  become: true
-  when: not ansible_check_mode # Check will fail if dependencies are not removed yet

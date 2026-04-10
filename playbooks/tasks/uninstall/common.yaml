@@ -11,9 +11,3 @@
   ansible.builtin.file:
     path: "{{ install_directory }}"
     state: absent
-- name: Remove Python3.12 venv
-  ansible.builtin.apt:
-    name: python3.12-venv
-    state: absent
-    update_cache: false
-  become: true

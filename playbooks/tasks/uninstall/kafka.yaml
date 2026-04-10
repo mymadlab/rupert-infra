@@ -35,9 +35,3 @@
   ansible.builtin.file:
     path: "{{ install_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
     state: absent
-- name: Remove openJDK 21 for Kafka
-  ansible.builtin.apt:
-    name: openjdk-21-jre-headless
-    state: absent
-    update_cache: false
-  become: true
