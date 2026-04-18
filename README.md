@@ -71,11 +71,12 @@ These Ansible playbooks are meant to be used against Raspberry PI 4 hardware run
 
 ### Python Modules
 
-  - [beartype 0.22.9](https://pypi.org/project/beartype/)
-  - [confluent_kafka 2.14.0](https://pypi.org/project/confluent-kafka/)
-  - [flask 3.1.3](https://pypi.org/project/Flask/)
-  - [python-vlc 3.0.21203](https://pypi.org/project/python-vlc/)
-  - [tinytuya 1.17.6](https://pypi.org/project/tinytuya/)
+  - [beartype ~= 0.22.0](https://pypi.org/project/beartype/)
+  - [confluent_kafka ~= 2.14.0](https://pypi.org/project/confluent-kafka/)
+  - [flask ~= 3.1.0](https://pypi.org/project/Flask/)
+  - [python-vlc ~= 3.0.0](https://pypi.org/project/python-vlc/)
+  - [tinytuya ~= 1.17.0](https://pypi.org/project/tinytuya/)
+	- [loguru ~= 0.7.0](https://github.com/Delgan/loguru)
 
 ## Gists
 
