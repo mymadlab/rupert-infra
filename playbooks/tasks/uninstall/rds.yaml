@@ -6,3 +6,7 @@
     virtualenv: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}"
     virtualenv_command: /usr/bin/python3 -m venv
     state: absent
+- name: Remove TinyTuya config file from app directory
+  ansible.builtin.file:
+    path: "{{ app_directory }}/cfg/tinytuya.json"
+    state: absent

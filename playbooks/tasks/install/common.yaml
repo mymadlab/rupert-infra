@@ -33,3 +33,7 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/bin"
     state: directory
+- name: Create app/cfg directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ app_directory }}/cfg"
+    state: directory

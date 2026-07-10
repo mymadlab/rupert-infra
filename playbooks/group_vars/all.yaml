@@ -27,6 +27,9 @@ python_vlc_version: 3.0.0
 ## Rupert Device Services
 tinytuya_version: 1.17.0
 
+## TinyTuya config
+tinytuya_api_region: us
+tinytuya_apidevice_id: scan
 
 # Unity
 unit_repo_url: https://packages.nginx.org/unit/ubuntu/

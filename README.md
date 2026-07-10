@@ -8,13 +8,13 @@ Responsible for deploying Ruperts infrastructure
 You will need to generated an encrypted ansible vault and store the value of ansible_become_pass.
 
 ```bash
-# Create vault
+# Create vault and add values for ansible_become_pass, tinytuya_api_key, and tinytuya_api_secret
 ansible-vault create inventories/<env>/group_vars/all/vault.yaml
 ```
 
 ```bash
 # Store the value for ansible_become_pass
-ansible-vault create inventories/<env>/group_vars/all/vault.yaml
+ansible-vault edit inventories/<env>/group_vars/all/vault.yaml
 ```
 
 ```bash
