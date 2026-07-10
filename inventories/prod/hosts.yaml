@@ -2,11 +2,11 @@ all:
   children:
     rupert:
       hosts:
-        rupert-core00:
+        rupert-core-00:
           ansible_host: 192.168.1.240
           ansible_user: rupert
           mac: d8:3a:dd:f0:4b:d8
-        rupert-arm01:
+        rupert-arm-01:
           ansible_host: 192.168.1.245
           ansible_user: rupert
           mac: 2c:cf:67:7d:9b:71

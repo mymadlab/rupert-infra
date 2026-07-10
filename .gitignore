@@ -193,6 +193,7 @@ cython_debug/
 *.retry
 ansible.log
 .vault_pass*
+**/vault.yaml
 **/vault.yml
 
 # Ruff stuff:

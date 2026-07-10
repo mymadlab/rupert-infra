@@ -28,6 +28,7 @@
     dest: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}"
     remote_src: true
     force: false
+  when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
 - name: Create a link to the Kafka directory in app
   ansible.builtin.file:
     src: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}"
@@ -50,6 +51,7 @@
     enabled: yes
     state: started
     daemon_reload: true
+  when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
   async: 60
   poll: 5
   become: true
