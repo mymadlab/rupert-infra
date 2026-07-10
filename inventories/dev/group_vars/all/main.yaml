@@ -1,6 +1,9 @@
 ---
 environment_name: dev
 
+# Prosumer repo settings
+rupert_prosumer_branch: v0.0.1
+
 # Settings Config
 ## Kafka settings config
 kafka_bootstrap_servers: "192.168.1.230:9092"
