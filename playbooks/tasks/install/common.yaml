@@ -37,3 +37,8 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/cfg"
     state: directory
+- name: Settings config file to app directory
+  ansible.builtin.template:
+    src: templates/settings.json.j2
+    dest: "{{ app_directory }}/cfg/settings.json"
+    mode: '0600'

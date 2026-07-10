@@ -13,6 +13,11 @@ kafka_checksum: sha512:16ce46e590ba915f01b720ea514445e49c88bf129cf4ceab88878b122
 kafka_scala_version: 2.13
 kafka_version: 4.2.0
 
+# Logging
+logging_rotation: 10 MB
+logging_retention: 7 days
+logging_level: INFO
+
 # Python venv
 ## All
 rupert_venv_version: 0.0.1

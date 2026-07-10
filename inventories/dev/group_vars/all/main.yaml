@@ -1,0 +1,11 @@
+---
+environment_name: dev
+
+# Settings Config
+## Kafka settings config
+kafka_bootstrap_servers: "192.168.1.230:9092"
+kafka_topics:
+  dev_audio: dev_audio
+  dev_devices: dev_devices
+kafka_consumer_group_id: rupert
+kafka_auto_offset_reset: smallest
