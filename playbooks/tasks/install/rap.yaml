@@ -16,4 +16,41 @@
       - "python-vlc~={{ python_vlc_version }}"
     virtualenv: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}"
     virtualenv_command: /usr/bin/python3 -m venv
-
+- name: Create Rupert Audio Player source directory
+  ansible.builtin.file:
+    path: "{{ install_directory }}/rupert_audio_player_{{ rupert_audio_player_branch | default('main') }}_src"
+    state: directory
+- name: Download Rupert Audio Player branch archive
+  ansible.builtin.get_url:
+    url: "https://github.com/mymadlab/rupert_audio_player/archive/refs/heads/{{ rupert_audio_player_branch | default('main') }}.tar.gz"
+    dest: "{{ install_directory }}/rupert_audio_player-{{ rupert_audio_player_branch | default('main') | replace('/', '-') }}.tar.gz"
+    mode: '0644'
+- name: Extract Rupert Audio Player branch archive
+  ansible.builtin.unarchive:
+    src: "{{ install_directory }}/rupert_audio_player-{{ rupert_audio_player_branch | default('main') | replace('/', '-') }}.tar.gz"
+    dest: "{{ install_directory }}/rupert_audio_player_{{ rupert_audio_player_branch | default('main') }}_src"
+    remote_src: true
+    extra_opts:
+      - --strip-components=1
+  when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+- name: Ensure Rupert venv exists
+  ansible.builtin.command:
+    cmd: /usr/bin/python3 -m venv "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}"
+  args:
+    creates: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}/bin/python"
+- name: Ensure Rupert Audio Player site-packages directory exists
+  ansible.builtin.file:
+    path: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}/lib/python3.12/site-packages/rupert_audio_player"
+    state: directory
+- name: Install Rupert Audio Player into Rupert venv
+  ansible.builtin.copy:
+    src: "{{ install_directory }}/rupert_audio_player_{{ rupert_audio_player_branch | default('main') }}_src/"
+    dest: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}/lib/python3.12/site-packages/rupert_audio_player/"
+    remote_src: true
+  when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
+- name: Create a link to rap.py
+  ansible.builtin.file:
+    src: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}/lib/python3.12/site-packages/rupert_audio_player/rap.py"
+    dest: "{{ app_directory }}/bin/rap.py"
+    state: link
+  when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
