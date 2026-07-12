@@ -37,6 +37,10 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/cfg"
     state: directory
+- name: Create app/log directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ app_directory }}/log"
+    state: directory
 - name: Rupert config file to app directory
   ansible.builtin.template:
     src: templates/rupert_config.json.j2
