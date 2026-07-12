@@ -37,8 +37,8 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/cfg"
     state: directory
-- name: Settings config file to app directory
+- name: Rupert config file to app directory
   ansible.builtin.template:
-    src: templates/settings.json.j2
-    dest: "{{ app_directory }}/cfg/settings.json"
+    src: templates/rupert_config.json.j2
+    dest: "{{ app_directory }}/cfg/rupert_config.json"
     mode: '0600'

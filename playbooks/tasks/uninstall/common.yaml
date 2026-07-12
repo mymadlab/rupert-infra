@@ -1,7 +1,7 @@
 # Uninstall common requirements for all playbooks
-- name: Remove settings config file from app directory
+- name: Remove Rupert config file from app directory
   ansible.builtin.file:
-    path: "{{ app_directory }}/cfg/settings.json"
+    path: "{{ app_directory }}/cfg/rupert_config.json"
     state: absent
 - name: Remove app/bin directory if it exists
   ansible.builtin.file:
