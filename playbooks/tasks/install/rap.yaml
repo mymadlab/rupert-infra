@@ -50,7 +50,13 @@
   when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
 - name: Create a link to rap.py
   ansible.builtin.file:
-    src: "{{ app_directory }}/rupert_venv-{{ rupert_venv_version }}/lib/python3.12/site-packages/rupert_audio_player/rap.py"
+    src: "{{ app_directory }}/rupert_venv/lib/python3.12/site-packages/rupert_audio_player/rap.py"
     dest: "{{ app_directory }}/bin/rap.py"
+    state: link
+  when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
+- name: Create a link to rap-control.sh
+  ansible.builtin.file:
+    src: "{{ app_directory }}/rupert_venv/lib/python3.12/site-packages/rupert_audio_player/rap-control.sh"
+    dest: "{{ app_directory }}/bin/rap-control.sh"
     state: link
   when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
