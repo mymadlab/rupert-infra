@@ -11,7 +11,7 @@ rupert_audio_player_branch: v0.0.1
 ## Kafka settings config
 kafka_bootstrap_servers: "192.168.1.230:9092"
 kafka_topics:
-  dev_audio: dev_audio
-  dev_devices: dev_devices
+  audio_dev: audio.dev
+  devices_dev: devices.dev
 kafka_consumer_group_id: rupert
 kafka_auto_offset_reset: smallest
