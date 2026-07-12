@@ -60,3 +60,18 @@
     dest: "{{ app_directory }}/bin/rap-control.sh"
     state: link
   when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
+- name: Rupert Audio Player service file
+  ansible.builtin.template:
+    src: templates/rap.service.j2
+    dest: /etc/systemd/system/rap.service
+  become: true
+- name: Enable Rupert Audio Player service
+  ansible.builtin.service:
+    name: rap
+    enabled: yes
+    state: started
+    daemon_reload: true
+  when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed
+  async: 60
+  poll: 5
+  become: true

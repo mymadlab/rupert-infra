@@ -4,8 +4,9 @@ timezone: UTC
 common_packages: []
 
 # General
-app_directory: ~/app
-install_directory: ~/install_rupert
+user_home_directory: "{{ ansible_facts['user_dir'] | default('/home/' ~ ansible_facts['user_id']) }}"
+app_directory: "{{ user_home_directory }}/app"
+install_directory: "{{ user_home_directory }}/install_rupert"
 deploy: present
 
 # Kafka
