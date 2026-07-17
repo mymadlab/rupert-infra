@@ -1,6 +1,9 @@
 ---
 environment_name: prod
 
+# Nginx Unit flask settings
+flask_branch: v0.0.1
+
 # Prosumer repo settings
 rupert_prosumer_branch: v0.0.1
 

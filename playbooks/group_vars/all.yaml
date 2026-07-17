@@ -20,6 +20,10 @@ logging_rotation: 10 MB
 logging_retention: 7 days
 logging_level: INFO
 
+# NGINX Unit Rupert Flask app
+nginx_unit_web_directory: "{{ user_home_directory }}/app/web"
+rupert_events_directory: "{{ user_home_directory }}/app/events"
+
 # Python venv
 ## All
 rupert_venv_version: 0.0.1

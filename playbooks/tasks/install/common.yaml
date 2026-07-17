@@ -45,4 +45,4 @@
   ansible.builtin.template:
     src: templates/rupert_config.json.j2
     dest: "{{ app_directory }}/cfg/rupert_config.json"
-    mode: '0600'
+    mode: '0660'

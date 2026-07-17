@@ -22,9 +22,17 @@
     state: absent
   become: true
 - name: Remove NGINX Unit APT repository
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ unit_repo_keyring_path }}] {{ unit_repo_url }} {{ ansible_facts['distribution_release'] }} unit"
-    filename: nginx-unit
+  ansible.builtin.deb822_repository:
+    name: nginx-unit
+    types:
+      - deb
+    uris:
+      - "{{ unit_repo_url }}"
+    suites:
+      - "{{ ansible_facts['distribution_release'] }}"
+    components:
+      - unit
+    signed_by: "{{ unit_repo_keyring_path }}"
     state: absent
   become: true
 - name: Remove NGINX Unit signing key
