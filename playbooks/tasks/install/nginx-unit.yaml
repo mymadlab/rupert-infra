@@ -78,6 +78,10 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/web"
     state: directory
+- name: Create the events directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ app_directory }}/events"
+    state: directory
 - name: Download Rupert Flask file for selected branch
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/mymadlab/rupert_flask/refs/heads/{{ flask_branch }}/rupert_flask.py"
