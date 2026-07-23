@@ -48,7 +48,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK RUPERT ENV"
     insertafter: '^\[Service\]'
     block: |
-      Environment="RUPERT_EVENTS_DIR={{ rupert_events_directory }}"
+      Environment="RUPERT_ACTIONS_DIR={{ rupert_actions_directory }}"
       Environment="RUPERT_CONFIG_JSON={{ app_directory }}/cfg/rupert_config.json"
   become: true
   when: not ansible_check_mode # Check will fail if unit package has not already been deployed
@@ -58,7 +58,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK RUPERT ENV"
     insertafter: '^\[Service\]'
     block: |
-      Environment="RUPERT_EVENTS_DIR={{ rupert_events_directory }}"
+      Environment="RUPERT_ACTIONS_DIR={{ rupert_actions_directory }}"
       Environment="RUPERT_CONFIG_JSON={{ app_directory }}/cfg/rupert_config.json"
   become: true
   when: not ansible_check_mode # Check will fail if unit package has not already been deployed
@@ -78,9 +78,9 @@
   ansible.builtin.file:
     path: "{{ app_directory }}/web"
     state: directory
-- name: Create the events directory if it does not exist
+- name: Create the actions directory if it does not exist
   ansible.builtin.file:
-    path: "{{ app_directory }}/events"
+    path: "{{ app_directory }}/actions"
     state: directory
 - name: Download Rupert Flask file for selected branch
   ansible.builtin.get_url:
@@ -90,7 +90,7 @@
 - name: Copy Rupert Flask file into web directory
   ansible.builtin.copy:
     src: "{{ install_directory }}/rupert_flask.py"
-    dest: /home/rupert/app/web/rupert_flask.py
+    dest: "{{ app_directory }}/web/rupert_flask.py"
     mode: '0755'
     remote_src: true
   when: not ansible_check_mode # Check will fail if Rupert venv has not already been deployed

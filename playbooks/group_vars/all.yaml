@@ -22,7 +22,7 @@ logging_level: INFO
 
 # NGINX Unit Rupert Flask app
 nginx_unit_web_directory: "{{ user_home_directory }}/app/web"
-rupert_events_directory: "{{ user_home_directory }}/app/events"
+rupert_actions_directory: "{{ user_home_directory }}/app/actions"
 
 # Python venv
 ## All
