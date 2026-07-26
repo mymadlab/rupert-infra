@@ -15,6 +15,7 @@ rupert_audio_player_branch: v0.0.1
 kafka_bootstrap_servers: "192.168.1.240:9092"
 kafka_topics:
   audio_loft: audio.loft
+  audio_master: audio.master
   devices_all: devices.all
 kafka_consumer_group_id: rupert
 kafka_auto_offset_reset: smallest

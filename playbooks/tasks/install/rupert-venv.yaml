@@ -23,6 +23,7 @@
     url: "https://github.com/mymadlab/rupert_prosumer/archive/refs/heads/{{ rupert_prosumer_branch | default('main') }}.tar.gz"
     dest: "{{ install_directory }}/rupert_prosumer-{{ rupert_prosumer_branch | default('main') | replace('/', '-') }}.tar.gz"
     mode: '0644'
+  when: not ansible_check_mode # Check will fail if ~/install_rupert does not already exist
 - name: Extract Rupert Prosumer branch archive
   ansible.builtin.unarchive:
     src: "{{ install_directory }}/rupert_prosumer-{{ rupert_prosumer_branch | default('main') | replace('/', '-') }}.tar.gz"

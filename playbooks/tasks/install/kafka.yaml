@@ -45,6 +45,11 @@
     src: files/kafka/rupert-kafka.service
     dest: /etc/systemd/system/
   become: true
+- name: Update Kafka advertised.listeners in 
+  ansible.builtin.lineinfile:
+    path: "{{ app_directory }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/config/server.properties"
+    regexp: '^advertised.listeners=PLAINTEXT://localhost:9092,CONTROLLER://localhost:9093$'
+    line: 'advertised.listeners=PLAINTEXT://{{ ansible_facts.default_ipv4.address }}:9092,CONTROLLER://{{ ansible_facts.default_ipv4.address }}:9093'
 - name: Enable kafka service
   ansible.builtin.service:
     name: rupert-kafka

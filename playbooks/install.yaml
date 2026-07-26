@@ -7,7 +7,6 @@
     - include_tasks: tasks/install/nginx-unit.yaml
       when: inventory_hostname in groups['core']
     - include_tasks: tasks/install/rupert-venv.yaml
-      when: inventory_hostname in groups['core']
     - include_tasks: tasks/install/rap.yaml
       when: inventory_hostname in groups['rap']
     - include_tasks: tasks/install/rds.yaml
